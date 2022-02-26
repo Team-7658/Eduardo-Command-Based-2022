@@ -59,6 +59,30 @@ public class RobotContainer {
   {
     // Grabber
     m_station.redOne.whenPressed(new InstantCommand(m_scorer::toggle, m_scorer));
+
+    // Climber Claws
+    m_station.redTwo.whenPressed(new InstantCommand(m_climber::toggle, m_climber));
+    
+    // Climber Winch
+    m_station.blueOne.whenPressed(new InstantCommand(m_climber::raise, m_climber));
+    m_station.blueOne.whenReleased(new InstantCommand(m_climber::stopWinch, m_climber));
+
+    m_station.blueTwo.whenPressed(new InstantCommand(m_climber::lower, m_climber));
+    m_station.blueTwo.whenReleased(new InstantCommand(m_climber::stopWinch, m_climber));
+
+    // Climber Pivot
+    m_station.yellowOne.whenPressed(new InstantCommand(m_climber::pivotForward, m_climber));
+    m_station.yellowOne.whenReleased(new InstantCommand(m_climber::stopPivot, m_climber));
+
+    m_station.yellowTwo.whenPressed(new InstantCommand(m_climber::pivotBackward, m_climber));
+    m_station.yellowTwo.whenReleased(new InstantCommand(m_climber::stopPivot, m_climber));
+
+    // Scorer Winch
+    m_station.greenOne.whenPressed(new InstantCommand(m_scorer::raise, m_scorer));
+    m_station.greenOne.whenReleased(new InstantCommand(m_scorer::stop, m_scorer));
+
+    m_station.greenTwo.whenPressed(new InstantCommand(m_scorer::lower, m_scorer));
+    m_station.greenTwo.whenReleased(new InstantCommand(m_scorer::stop, m_scorer));
   }
 
   /**
