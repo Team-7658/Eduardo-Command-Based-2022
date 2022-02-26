@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
+import com.revrobotics.RelativeEncoder;
 
 public class Chassis extends SubsystemBase {
   // Array holding all CANSparkMax controllers for the Chassis.

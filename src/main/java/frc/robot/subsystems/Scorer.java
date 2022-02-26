@@ -26,7 +26,7 @@ public class Scorer extends SubsystemBase {
   {
     pneumatics = RobotContainer.m_pneumatics;
     grabber = pneumatics.getGrabber();
-    winch = new CANSparkMax(Constants.CAN.SCORER_WINCH, MotorType.kBrushed);
+    winch = new CANSparkMax(Constants.CAN.SCORER_WINCH, MotorType.kBrushless);
     winchSpeed = 0.5;
 
     grabber.set(Value.kReverse);

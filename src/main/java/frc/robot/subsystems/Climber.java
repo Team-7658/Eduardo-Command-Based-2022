@@ -79,12 +79,12 @@ public class Climber extends SubsystemBase {
 
   public void raise()
   {
-    telescopingWinch.set(winchSpeed);
+    telescopingWinch.set(-winchSpeed);
   }
 
   public void lower()
   {
-    telescopingWinch.set(-winchSpeed);
+    telescopingWinch.set(winchSpeed);
   }
 
   public void stopWinch()

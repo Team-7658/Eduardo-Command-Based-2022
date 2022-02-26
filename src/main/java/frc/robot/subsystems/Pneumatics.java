@@ -24,6 +24,7 @@ public class Pneumatics extends SubsystemBase{
   {
     // Initializes compressor
     compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+    compressor.enableDigital();
 
     // Initializes PCM
     pcm = new CAN(Constants.CAN.PCM_ID, 4, 9);

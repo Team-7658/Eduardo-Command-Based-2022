@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
     m_pneumatics = RobotContainer.m_pneumatics;
 
     // Starts compressor
-    m_pneumatics.getCompressor().enableDigital();
+    //m_pneumatics.getCompressor().enableDigital();
   }
 
   /**
