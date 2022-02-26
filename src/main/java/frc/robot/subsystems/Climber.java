@@ -11,17 +11,24 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Climber extends SubsystemBase {
   // Motor Controllers
   CANSparkMax telescopingWinch;
-  CANSparkMax pivotWinchLeader;
-  CANSparkMax pivotWinchFollower;
+  CANSparkMax pivotWinch;
 
   // Double Solenoid
   DoubleSolenoid claws;
 
   Pneumatics pneumatics;
+
+  // Limit switch
+  DigitalInput climbLim;
+
+  // Pre-set speeds
+  double pivotSpeed = 0.05;
+  double winchSpeed = 1;
 
   /** Creates a new Climber. */
   public Climber() 
@@ -30,12 +37,14 @@ public class Climber extends SubsystemBase {
 
     // Motor Controllers
     telescopingWinch = new CANSparkMax(Constants.CAN.TELESCOPING_ARM_WINCH, MotorType.kBrushless);
-    pivotWinchLeader = new CANSparkMax(Constants.CAN.PIVOT_WINCH_LEADER, MotorType.kBrushless);
-    pivotWinchFollower = new CANSparkMax(Constants.CAN.PIVOT_WINCH_FOLLOWER, MotorType.kBrushless);
-    pivotWinchFollower.follow(pivotWinchLeader);
+    pivotWinch = new CANSparkMax(Constants.CAN.PIVOT_WINCH, MotorType.kBrushless);
 
     // Double Solenoids
     claws = pneumatics.getClaws();
+    claws.set(Value.kForward);
+
+    // Limit switch
+    climbLim = new DigitalInput(Constants.DIGITAL.CLIMB_LIM);
   }
 
   public void openClaws()
@@ -46,6 +55,41 @@ public class Climber extends SubsystemBase {
   public void closeClaws()
   {
     claws.set(Value.kForward);
+  }
+
+  public void toggle()
+  {
+    claws.toggle();
+  }
+
+  public void pivotForward()
+  {
+    pivotWinch.set(pivotSpeed);
+  }
+
+  public void pivotBackward()
+  {
+    pivotWinch.set(-pivotSpeed);
+  }
+
+  public void stopPivot()
+  {
+    pivotWinch.set(0);
+  }
+
+  public void raise()
+  {
+    telescopingWinch.set(winchSpeed);
+  }
+
+  public void lower()
+  {
+    telescopingWinch.set(-winchSpeed);
+  }
+
+  public void stopWinch()
+  {
+    telescopingWinch.set(0);
   }
 
   @Override

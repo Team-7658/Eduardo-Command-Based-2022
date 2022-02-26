@@ -11,12 +11,15 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 
 public class Scorer extends SubsystemBase {
   Pneumatics pneumatics;
   DoubleSolenoid grabber;
   CANSparkMax winch;
+  private double winchSpeed;
+  private DigitalInput elevatorLim;
 
   /** Creates a new Scorer. */
   public Scorer() 
@@ -24,6 +27,11 @@ public class Scorer extends SubsystemBase {
     pneumatics = RobotContainer.m_pneumatics;
     grabber = pneumatics.getGrabber();
     winch = new CANSparkMax(Constants.CAN.SCORER_WINCH, MotorType.kBrushed);
+    winchSpeed = 0.5;
+
+    grabber.set(Value.kReverse);
+
+    elevatorLim = new DigitalInput(Constants.DIGITAL.SCORE_LIM);
   }
 
   public void openGrabber()
@@ -34,6 +42,26 @@ public class Scorer extends SubsystemBase {
   public void closeGrabber()
   {
     grabber.set(Value.kForward);
+  }
+
+  public void toggle()
+  {
+    grabber.toggle();
+  }
+
+  public void raise()
+  {
+    winch.set(winchSpeed);
+  }
+
+  public void lower()
+  {
+    winch.set(-winchSpeed);
+  }
+
+  public void stop()
+  {
+    winch.set(0);
   }
 
   @Override

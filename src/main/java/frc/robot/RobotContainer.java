@@ -57,13 +57,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() 
   {
-    // Climber claws
-    m_station.blueOne.whenPressed(new InstantCommand(m_climber::openClaws, m_climber));
-    m_station.blueTwo.whenPressed(new InstantCommand(m_climber::closeClaws, m_climber));
-
     // Grabber
-    m_station.redOne.whenPressed(new InstantCommand(m_scorer::openGrabber, m_scorer));
-    m_station.redTwo.whenPressed(new InstantCommand(m_scorer::closeGrabber, m_scorer));
+    m_station.redOne.whenPressed(new InstantCommand(m_scorer::toggle, m_scorer));
   }
 
   /**

@@ -23,8 +23,7 @@ public final class Constants {
         public static int RIGHT_BACK_MOTOR = 4;
         public static int SCORER_WINCH = 5;
         public static int TELESCOPING_ARM_WINCH = 6;
-        public static int PIVOT_WINCH_LEADER = 7;
-        public static int PIVOT_WINCH_FOLLOWER = 8;
+        public static int PIVOT_WINCH = 7;
 
         // PCM CAN ID
         public static int PCM_ID = 0;
@@ -50,11 +49,35 @@ public final class Constants {
     public static class PNEUMATICS
     {
         // Ports for arm solenoids
-        public static int ARM_SOLENOID_ONE = 0;
-        public static int ARM_SOLENOID_TWO = 1;
+        public static int ARM_SOLENOID_ONE = 2;
+        public static int ARM_SOLENOID_TWO = 3;
 
         // Ports for claw solenoids
-        public static int CLAWS_SOLENOID_FIRST = 2;
-        public static int CLAWS_SOLENOID_SECOND = 3;
+        public static int CLAWS_SOLENOID_FIRST = 0;
+        public static int CLAWS_SOLENOID_SECOND = 1;
+    }
+
+    // Digital input values
+    public static class DIGITAL
+    {
+        // Ports for scorer limit switch
+        public static int SCORE_LIM = 8;
+
+        // Ports for climb limit switch
+        public static int CLIMB_LIM = 9;
+    }
+
+    // Drive constants (ALL measurements in inches)
+    public static class DRIVE_CONSTANTS
+    {
+        // Encoder constants
+        public static int COUNTS_PER_REV = 42;
+        public static double WHEEL_DIAMETER = 6;
+        public static double DISTANCE_PER_COUNT = (WHEEL_DIAMETER * Math.PI) / (double) COUNTS_PER_REV;
+
+        // Auto command constants
+        public static double FWD_DIST = 40;
+        public static double BACK_DIST = 90;
+        public static double AUTO_SPEED = 0.5;
     }
 }

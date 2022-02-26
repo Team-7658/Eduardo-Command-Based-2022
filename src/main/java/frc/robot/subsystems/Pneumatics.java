@@ -14,8 +14,6 @@ public class Pneumatics extends SubsystemBase{
   // Declares variables
   private Compressor compressor;
   private CAN pcm;
-  private boolean isEnabled;
-  private boolean pressureSwitch;
 
   // Creates solenoid objects
   private DoubleSolenoid armSolenoid;
@@ -26,13 +24,6 @@ public class Pneumatics extends SubsystemBase{
   {
     // Initializes compressor
     compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-
-    // compressor.setClosedLoopControl(true);
-    // compressor.setClosedLoopControl(false);
-
-    // Initializes isEnabled and pressureSwitch booleans
-    isEnabled = compressor.enabled();
-    pressureSwitch = compressor.getPressureSwitchValue();
 
     // Initializes PCM
     pcm = new CAN(Constants.CAN.PCM_ID, 4, 9);
