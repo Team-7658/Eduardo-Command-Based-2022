@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -12,12 +13,14 @@ import frc.robot.subsystems.Chassis;
 public class DriveDistance extends CommandBase {
   private double distance;
   private double dPerCount;
+  private int direction;
 
   private Chassis chassis;
 
   /** Creates a new DriveDistance. */
-  public DriveDistance() { 
-    distance = Constants.DRIVE_CONSTANTS.FWD_DIST;
+  public DriveDistance(int dir, double dist) { 
+    distance = dist;
+    direction = dir;
     dPerCount = Constants.DRIVE_CONSTANTS.DISTANCE_PER_COUNT;
     
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,7 +39,7 @@ public class DriveDistance extends CommandBase {
   @Override
   public void execute() 
   {
-    chassis.driveStraight(0);
+    chassis.driveStraight(direction);
   }
 
   // Called once the command ends or is interrupted.
@@ -44,11 +47,12 @@ public class DriveDistance extends CommandBase {
   public void end(boolean interrupted) 
   {
     chassis.stopChassis();
+    Timer.delay(2);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (chassis.getEncoderPosition(0) * dPerCount) >= distance;
+    return (Math.abs(chassis.getEncoderPosition(0)) * dPerCount) >= distance;
   }
 }
