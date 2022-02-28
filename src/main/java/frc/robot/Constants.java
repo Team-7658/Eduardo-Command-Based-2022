@@ -73,11 +73,12 @@ public final class Constants {
         // Encoder constants
         public static int COUNTS_PER_REV = 42;
         public static double WHEEL_DIAMETER = 6;
-        public static double DISTANCE_PER_COUNT = (WHEEL_DIAMETER * Math.PI) / (double) COUNTS_PER_REV;
+        public static double GEAR_RATIO = 10.7;
+        public static double DISTANCE_PER_COUNT = (WHEEL_DIAMETER * Math.PI) / ((double) COUNTS_PER_REV * GEAR_RATIO);
 
         // Auto command constants
         public static double FWD_DIST = 40;
         public static double BACK_DIST = 90;
-        public static double AUTO_SPEED = 0.5;
+        public static double AUTO_SPEED = 0.25;
     }
 }

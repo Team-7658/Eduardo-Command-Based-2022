@@ -64,6 +64,16 @@ public class Scorer extends SubsystemBase {
     winch.set(0);
   }
 
+  public CANSparkMax getWinch() 
+  {
+    return winch;
+  }
+  
+  public DigitalInput getSwitch() 
+  {
+    return elevatorLim;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

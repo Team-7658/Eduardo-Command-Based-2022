@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public final Chassis m_chassis = new Chassis();
+  public final static Chassis m_chassis = new Chassis();
 
   public final Climber m_climber = new Climber();
 
@@ -34,7 +34,7 @@ public class RobotContainer {
 
   public static ButtonStation m_station = new ButtonStation();
 
-  private final Auton m_autoCommand = new Auton(m_chassis);
+  private final Auton m_autoCommand = new Auton();
 
   private final DriveChassis m_chassisCommand = new DriveChassis(m_chassis);
 
@@ -83,6 +83,8 @@ public class RobotContainer {
 
     m_station.greenTwo.whenPressed(new InstantCommand(m_scorer::lower, m_scorer));
     m_station.greenTwo.whenReleased(new InstantCommand(m_scorer::stop, m_scorer));
+
+    // Testing stuff
   }
 
   /**
