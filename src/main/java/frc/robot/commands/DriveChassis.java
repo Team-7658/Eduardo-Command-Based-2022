@@ -43,7 +43,7 @@ public class DriveChassis extends CommandBase {
   @Override
   public void execute() 
   {
-    m_mecanum.driveMecanum(RobotContainer.m_stick.getRawAxis(0), -RobotContainer.m_stick.getRawAxis(1), RobotContainer.m_stick.getRawAxis(2));
+    m_mecanum.driveMecanum(RobotContainer.m_stick.getRawAxis(0), -RobotContainer.m_stick.getRawAxis(1), RobotContainer.m_stick.getRawAxis(2), RobotContainer.m_stick.getRawButton(1));
   }
 
   // Called once the command ends or is interrupted.

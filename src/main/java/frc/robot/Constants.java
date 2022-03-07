@@ -80,5 +80,8 @@ public final class Constants {
         public static double FWD_DIST = 40;
         public static double BACK_DIST = 90;
         public static double AUTO_SPEED = 0.25;
+
+        // Speed constants
+        public static double WINCH_SPEED = 0.5;
     }
 }

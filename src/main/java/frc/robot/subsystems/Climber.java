@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -22,6 +23,7 @@ public class Climber extends SubsystemBase {
   DoubleSolenoid claws;
 
   Pneumatics pneumatics;
+  Motors motors;
 
   // Limit switch
   DigitalInput climbLim;
@@ -34,10 +36,11 @@ public class Climber extends SubsystemBase {
   public Climber() 
   {
     pneumatics = RobotContainer.m_pneumatics;
+    motors = RobotContainer.m_motors;
 
     // Motor Controllers
-    telescopingWinch = new CANSparkMax(Constants.CAN.TELESCOPING_ARM_WINCH, MotorType.kBrushless);
-    pivotWinch = new CANSparkMax(Constants.CAN.PIVOT_WINCH, MotorType.kBrushless);
+    telescopingWinch = motors.getTelescopingWinch();
+    pivotWinch = motors.getPivotWinch();
 
     // Double Solenoids
     claws = pneumatics.getClaws();

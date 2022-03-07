@@ -11,6 +11,7 @@ import frc.robot.commands.Auton;
 import frc.robot.commands.DriveChassis;
 import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Motors;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Scorer;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -39,6 +40,7 @@ public class RobotContainer {
   private final DriveChassis m_chassisCommand = new DriveChassis(m_chassis);
 
   public final static Pneumatics m_pneumatics = new Pneumatics();
+  public final static Motors m_motors = new Motors();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

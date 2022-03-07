@@ -14,6 +14,7 @@ public class Mecanum {
     double rF;
     double rB;
     double max;
+    double creep;
 
     // Creates motor opjects, to be initialized in constructor
     CANSparkMax leftFront;
@@ -33,6 +34,7 @@ public class Mecanum {
         rF = 0;
         rB = 0;
         max = 0;
+        creep = 0.5;
 
         // Initializes CANSparkMax controllers using array
         leftFront = controllers[Constants.ARRAY_INDEX.LEFT_FRONT_INDEX];
@@ -49,7 +51,7 @@ public class Mecanum {
         }
     }
 
-    public void driveMecanum(double xAxis, double yAxis, double zAxis)
+    public void driveMecanum(double xAxis, double yAxis, double zAxis, boolean trigger)
     {
         // Corrects potential drift using the driftThreshold method
         xAxis = driftThreshold(xAxis, 0.1);
@@ -92,6 +94,15 @@ public class Mecanum {
         // lB = driftThreshold(lB, 0.1);
         // rF = driftThreshold(rF, 0.1);
         // rB = driftThreshold(rB, 0.1);
+
+        // Creep mode
+        if(trigger)
+        {
+            lF *= creep;
+            lB *= creep;
+            rF *= creep;
+            rB *= creep;
+        }
 
         // Sets motors to calculated values
         leftFront.set(lF);

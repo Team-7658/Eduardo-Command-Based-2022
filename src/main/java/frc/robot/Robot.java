@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Pneumatics;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,6 +24,9 @@ public class Robot extends TimedRobot {
 
   private Pneumatics m_pneumatics;
 
+  private UsbCamera camera1;
+  private UsbCamera camera2;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -35,8 +40,8 @@ public class Robot extends TimedRobot {
     // Imports pneumatics object
     m_pneumatics = RobotContainer.m_pneumatics;
 
-    // Starts compressor
-    //m_pneumatics.getCompressor().enableDigital();
+    camera1 = CameraServer.startAutomaticCapture(0);
+    camera2 = CameraServer.startAutomaticCapture(1);
   }
 
   /**

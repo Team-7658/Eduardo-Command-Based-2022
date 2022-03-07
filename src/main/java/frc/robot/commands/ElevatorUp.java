@@ -4,54 +4,52 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Chassis;
+import frc.robot.subsystems.Motors;
 
-public class DriveDistance extends CommandBase {
-  private double distance;
-  private double dPerCount;
-  private int direction;
+import com.revrobotics.CANSparkMax;
 
-  private Chassis chassis;
+import edu.wpi.first.wpilibj.DigitalInput;
 
-  /** Creates a new DriveDistance. */
-  public DriveDistance(int dir, double dist) { 
-    distance = dist;
-    direction = dir;
-    dPerCount = Constants.DRIVE_CONSTANTS.DISTANCE_PER_COUNT;
-    
+public class ElevatorUp extends CommandBase {
+  private Motors motors;
+
+  private DigitalInput limitSwitch;
+
+  /** Creates a new ElevatorUp. */
+  public ElevatorUp() {
     // Use addRequirements() here to declare subsystem dependencies.
-    chassis = RobotContainer.m_chassis;
-    addRequirements(chassis);
+    motors = RobotContainer.m_motors;
+    addRequirements(motors);
+
+    limitSwitch = new DigitalInput(Constants.DIGITAL.SCORE_LIM);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() 
   {
-    chassis.resetEncoder(0);
+    motors.scorerWinchUp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
   {
-    chassis.driveStraight(direction);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) 
   {
-    chassis.stopChassis();
+    motors.scorerWinchStop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(chassis.getEncoderPosition(0)) * dPerCount) >= distance;
+    return limitSwitch.get();
   }
 }

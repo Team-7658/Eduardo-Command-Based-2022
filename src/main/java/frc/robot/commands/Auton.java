@@ -6,8 +6,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 // import frc.robot.RobotContainer;
+import frc.robot.RobotContainer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -19,13 +21,16 @@ public class Auton extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       // Raise elevator command
-
+      new ElevatorUp(),
 
       // Drive forward a set distance
       new DriveDistance(0, Constants.DRIVE_CONSTANTS.FWD_DIST),
+      new WaitCommand(1),
     
       // Open arm command
-      
+      new InstantCommand(RobotContainer.m_pneumatics::openGrabber, RobotContainer.m_pneumatics),
+      new WaitCommand(1),
+
       // Drive backward a set distance
       new DriveDistance(1, Constants.DRIVE_CONSTANTS.BACK_DIST)
     );

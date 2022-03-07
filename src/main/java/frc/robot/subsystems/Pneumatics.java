@@ -53,4 +53,14 @@ public class Pneumatics extends SubsystemBase{
   {
     return compressor;
   }
+
+  public void toggleGrabber()
+  {
+    armSolenoid.toggle();
+  }
+
+  public void openGrabber()
+  {
+    armSolenoid.set(Value.kForward);
+  }
 }

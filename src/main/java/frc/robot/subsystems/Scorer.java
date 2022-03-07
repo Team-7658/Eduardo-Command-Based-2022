@@ -17,22 +17,21 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Scorer extends SubsystemBase {
   Pneumatics pneumatics;
+  Motors motors;
   DoubleSolenoid grabber;
   CANSparkMax winch;
   private double winchSpeed;
-  private DigitalInput elevatorLim;
 
   /** Creates a new Scorer. */
   public Scorer() 
   {
     pneumatics = RobotContainer.m_pneumatics;
+    motors = RobotContainer.m_motors;
     grabber = pneumatics.getGrabber();
-    winch = new CANSparkMax(Constants.CAN.SCORER_WINCH, MotorType.kBrushless);
-    winchSpeed = 0.5;
+    winch = motors.getScorerWinch();
+    winchSpeed = Constants.DRIVE_CONSTANTS.WINCH_SPEED;
 
     grabber.set(Value.kReverse);
-
-    elevatorLim = new DigitalInput(Constants.DIGITAL.SCORE_LIM);
   }
 
   public void openGrabber()
@@ -63,16 +62,6 @@ public class Scorer extends SubsystemBase {
   public void stop()
   {
     winch.set(0);
-  }
-
-  public CANSparkMax getWinch() 
-  {
-    return winch;
-  }
-  
-  public DigitalInput getSwitch() 
-  {
-    return elevatorLim;
   }
 
   @Override
